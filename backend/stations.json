@@ -1,0 +1,226 @@
+[
+ {
+  "name": "Astún",
+  "zone": "Pirineos",
+  "lat": 42.8075,
+  "lon": -0.506,
+  "base": 1658,
+  "top": 2300
+ },
+ {
+  "name": "Candanchú",
+  "zone": "Pirineos",
+  "lat": 42.788,
+  "lon": -0.529,
+  "base": 1530,
+  "top": 2400
+ },
+ {
+  "name": "Formigal",
+  "zone": "Pirineos",
+  "lat": 42.775,
+  "lon": -0.364,
+  "base": 1500,
+  "top": 2250
+ },
+ {
+  "name": "Panticosa",
+  "zone": "Pirineos",
+  "lat": 42.723,
+  "lon": -0.284,
+  "base": 1165,
+  "top": 2220
+ },
+ {
+  "name": "Cerler",
+  "zone": "Pirineos",
+  "lat": 42.589,
+  "lon": 0.537,
+  "base": 1500,
+  "top": 2630
+ },
+ {
+  "name": "Baqueira-Beret",
+  "zone": "Pirineos",
+  "lat": 42.699,
+  "lon": 0.934,
+  "base": 1500,
+  "top": 2610
+ },
+ {
+  "name": "Boí Taüll",
+  "zone": "Pirineos",
+  "lat": 42.479,
+  "lon": 0.865,
+  "base": 2020,
+  "top": 2751
+ },
+ {
+  "name": "Espot",
+  "zone": "Pirineos",
+  "lat": 42.565,
+  "lon": 1.07,
+  "base": 1500,
+  "top": 2320
+ },
+ {
+  "name": "Port Ainé",
+  "zone": "Pirineos",
+  "lat": 42.425,
+  "lon": 1.205,
+  "base": 1650,
+  "top": 2440
+ },
+ {
+  "name": "La Molina",
+  "zone": "Pirineos",
+  "lat": 42.342,
+  "lon": 1.94,
+  "base": 1700,
+  "top": 2537
+ },
+ {
+  "name": "Masella",
+  "zone": "Pirineos",
+  "lat": 42.34,
+  "lon": 1.9,
+  "base": 1600,
+  "top": 2535
+ },
+ {
+  "name": "Vall de Núria",
+  "zone": "Pirineos",
+  "lat": 42.397,
+  "lon": 2.153,
+  "base": 1964,
+  "top": 2252
+ },
+ {
+  "name": "Vallter 2000",
+  "zone": "Pirineos",
+  "lat": 42.426,
+  "lon": 2.265,
+  "base": 1960,
+  "top": 2535
+ },
+ {
+  "name": "Port del Comte",
+  "zone": "Pirineos",
+  "lat": 42.175,
+  "lon": 1.56,
+  "base": 1700,
+  "top": 2400
+ },
+ {
+  "name": "Alto Campoo",
+  "zone": "Cantábrica",
+  "lat": 43.04,
+  "lon": -4.38,
+  "base": 1650,
+  "top": 2175
+ },
+ {
+  "name": "San Isidro",
+  "zone": "Cantábrica",
+  "lat": 43.06,
+  "lon": -5.37,
+  "base": 1500,
+  "top": 2100
+ },
+ {
+  "name": "Fuentes de Invierno",
+  "zone": "Cantábrica",
+  "lat": 43.06,
+  "lon": -5.39,
+  "base": 1500,
+  "top": 1950
+ },
+ {
+  "name": "Valgrande-Pajares",
+  "zone": "Cantábrica",
+  "lat": 43.005,
+  "lon": -5.765,
+  "base": 1350,
+  "top": 1834
+ },
+ {
+  "name": "Leitariegos",
+  "zone": "Cantábrica",
+  "lat": 42.997,
+  "lon": -6.415,
+  "base": 1500,
+  "top": 1800
+ },
+ {
+  "name": "Manzaneda",
+  "zone": "Cantábrica",
+  "lat": 42.26,
+  "lon": -7.29,
+  "base": 1450,
+  "top": 1760
+ },
+ {
+  "name": "La Pinilla",
+  "zone": "Central",
+  "lat": 41.205,
+  "lon": -3.47,
+  "base": 1500,
+  "top": 2273
+ },
+ {
+  "name": "Navacerrada",
+  "zone": "Central",
+  "lat": 40.785,
+  "lon": -4.008,
+  "base": 1700,
+  "top": 2200
+ },
+ {
+  "name": "Valdesquí",
+  "zone": "Central",
+  "lat": 40.8,
+  "lon": -3.96,
+  "base": 1860,
+  "top": 2280
+ },
+ {
+  "name": "La Covatilla",
+  "zone": "Central",
+  "lat": 40.355,
+  "lon": -5.72,
+  "base": 1970,
+  "top": 2369
+ },
+ {
+  "name": "Valdezcaray",
+  "zone": "Ibérico",
+  "lat": 42.25,
+  "lon": -3.01,
+  "base": 1530,
+  "top": 2125
+ },
+ {
+  "name": "Javalambre",
+  "zone": "Ibérico",
+  "lat": 40.1,
+  "lon": -1.02,
+  "base": 1650,
+  "top": 2000
+ },
+ {
+  "name": "Valdelinares",
+  "zone": "Ibérico",
+  "lat": 40.37,
+  "lon": -0.62,
+  "base": 1700,
+  "top": 2024
+ },
+ {
+  "name": "Sierra Nevada",
+  "zone": "Penibético",
+  "lat": 37.095,
+  "lon": -3.398,
+  "base": 2100,
+  "top": 3300
+ }
+]

@@ -1,0 +1,4 @@
+numpy>=1.26
+requests>=2.31
+eccodes>=1.7
+ecmwf-opendata>=0.3.10
