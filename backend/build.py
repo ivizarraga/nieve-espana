@@ -57,7 +57,7 @@ SOURCES = [
 ]
 OM_MODELS = [s for s in SOURCES if s["id"] != "ecmwf_od"]
 OM_VARS = ("precipitation,temperature_2m,relative_humidity_2m,wind_speed_10m,"
-           "wind_gusts_10m,wind_direction_10m,cloud_cover,freezing_level_height")
+           "wind_gusts_10m,wind_direction_10m,cloud_cover,freezing_level_height,snow_depth")
 ELEV = ["top", "ref", "base"]          # cima, media, base
 
 # Malla de Europa (0,25°): de Canarias/norte de África a Escandinavia
@@ -183,7 +183,9 @@ def derive_om(h):
             "gust": arr(h.get("wind_gusts_10m", [None] * len(p))),
             "dir": arr(h.get("wind_direction_10m", [None] * len(p))),
             "cloud": arr(h.get("cloud_cover", [None] * len(p))),
-            "fl": arr(h.get("freezing_level_height", [None] * len(p)))}
+            "fl": arr(h.get("freezing_level_height", [None] * len(p))),
+            # espesor de nieve en el suelo según el modelo (m → cm). No sabe de nieve artificial ni pisado.
+            "depth": arr(h.get("snow_depth", [None] * len(p))) * 100}
 
 
 # ---------------------------------------------------------------------------
@@ -357,7 +359,8 @@ def ecmwf_station_series(sfc_f, prof, run, timeline):
             per_el.append({"p": p * nan, "snow": snow * nan, "rain": rain * nan, "temp": temp * nan,
                            "wind": wind * nan, "gust": np.full(len(hours), np.nan), "dir": wdir * nan,
                            "cloud": np.full(len(hours), np.nan),
-                           "fl": np.interp(hours, PL_STEPS, fl_pt) * nan})
+                           "fl": np.interp(hours, PL_STEPS, fl_pt) * nan,
+                           "depth": np.full(len(hours), np.nan)})
         out.append(per_el)
     return out
 
@@ -367,7 +370,7 @@ def ecmwf_station_series(sfc_f, prof, run, timeline):
 # ---------------------------------------------------------------------------
 def blend(per, weights, n):
     out = {}
-    for k in ["p", "snow", "rain", "temp", "wind", "gust", "cloud", "fl"]:
+    for k in ["p", "snow", "rain", "temp", "wind", "gust", "cloud", "fl", "depth"]:
         sv, sw = np.zeros(n), np.zeros(n)
         for sid, d in per.items():
             v = d[k]
@@ -638,11 +641,11 @@ def main():
                 b = blend(per, weights, n)
                 els.append({"b": {"snow": rnd(b["snow"], 2), "rain": rnd(b["rain"], 2), "temp": rnd(b["temp"], 1),
                                   "wind": rnd(b["wind"], 0), "gust": rnd(b["gust"], 0), "dir": rnd(b["dir"], 0),
-                                  "cloud": rnd(b["cloud"], 0), "fl": rnd(b["fl"], 0)},
+                                  "cloud": rnd(b["cloud"], 0), "fl": rnd(b["fl"], 0), "depth": rnd(b["depth"], 0)},
                             "per": {sid: {"snow": rnd(d["snow"], 2)} for sid, d in per.items()}})
                 if k == 1:
                     per_mid.append(per); blend_mid.append(b)
-            out_st.append({**{k: s[k] for k in ("name", "zone", "lat", "lon", "base", "ref", "top")},
+            out_st.append({**{k: s[k] for k in ("name", "zone", "lat", "lon", "base", "ref", "top", "infonieve", "aviso") if k in s},
                            "dem": s.get("dem"), "coordOk": s.get("coordOk"), "el": els,
                            "ens": ens[i] if ens else None})
         stations = {"generated": now_utc.isoformat(), "time": timeline,
