@@ -1,0 +1,80 @@
+# Ejecuta el generador de datos y publica la web en GitHub Pages.
+# Horas en UTC: 06:40 (verifica con AEMET el día anterior), 09:20 y 21:20
+# (tras cada ejecución de ECMWF de 00 y 12 UTC). También se puede lanzar a mano.
+name: Actualizar previsión
+
+on:
+  schedule:
+    - cron: "40 6 * * *"
+    - cron: "20 9 * * *"
+    - cron: "20 21 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: prevision
+  cancel-in-progress: false
+
+jobs:
+  construir:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar la librería para leer GRIB (ecCodes)
+        run: sudo apt-get update -q && sudo apt-get install -y -q libeccodes-dev
+
+      - name: Instalar librerías de Python
+        run: pip install -r backend/requirements.txt
+
+      - name: Recuperar los datos de la ejecución anterior (por si alguna fuente falla)
+        uses: actions/cache/restore@v4
+        with:
+          path: site/data
+          key: datos-${{ github.run_id }}
+          restore-keys: datos-
+
+      - name: Generar previsión
+        env:
+          AEMET_API_KEY: ${{ secrets.AEMET_API_KEY }}
+        run: python backend/build.py
+
+      - name: Guardar los datos para la próxima ejecución
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: site/data
+          key: datos-${{ github.run_id }}
+
+      - name: Guardar la verificación en el repositorio
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add verif
+          git diff --cached --quiet || (git commit -m "Verificación $(date -u +%F_%H%M)" && git pull --rebase && git push)
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  publicar:
+    needs: construir
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.despliegue.outputs.page_url }}
+    steps:
+      - id: despliegue
+        uses: actions/deploy-pages@v4
