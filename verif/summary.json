@@ -1,0 +1,11 @@
+{
+ "weights": {
+  "ecmwf_ifs": 0.4,
+  "icon_eu": 0.3,
+  "meteofrance_seamless": 0.2,
+  "ecmwf_od": 0.1
+ },
+ "n": 0,
+ "sources": {},
+ "pairs": {}
+}
